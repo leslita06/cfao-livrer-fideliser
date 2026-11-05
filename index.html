@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CFAO Mobility | Livrer et fidéliser, tableau de bord</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="theme-color" content="#00438D">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--b:#00438D;--bf:#002F66;--v:#3E3D5C;--c:#E6EEF7;--f:#F5F7FA;--fi:#DDE3EC;--g:#6B6A80;--ok:#1E7B45;--okc:#DCF3E6;--no:#B42318;--noc:#FDE2E1;--am:#9A5B00;--amc:#FFF1D6;--wa:#E7F8EE}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--f);color:#2B2A35;font-family:'Open Sans',system-ui,sans-serif;font-size:14px;line-height:1.45}
+button{font-family:inherit}
+.demo{background:var(--v);color:#fff;text-align:center;font-weight:700;font-size:12.5px;padding:7px 12px;letter-spacing:.03em;position:sticky;top:0;z-index:30}
+.demo i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#FFC24D;margin-right:8px;vertical-align:1px}
+header{background:#fff;border-bottom:1px solid var(--fi)}
+.hin{max-width:1180px;margin:0 auto;padding:16px 18px 18px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.hin img{height:46px;width:auto}
+.hin .sep{width:1px;align-self:stretch;background:var(--fi)}
+.hin h1{font-family:Montserrat,sans-serif;font-weight:800;color:var(--b);font-size:24px;margin:0;line-height:1.15}
+.hin p{margin:3px 0 0;color:var(--g);font-size:13px}
+.jour{margin-left:auto;text-align:right}
+.jour b{display:block;font-family:Montserrat,sans-serif;color:var(--v);font-size:15px}
+.jour span{font-size:12px;color:var(--g)}
+main{max-width:1180px;margin:0 auto;padding:18px 16px 30px}
+h2{font-family:Montserrat,sans-serif;font-weight:700;color:var(--b);font-size:18px;margin:28px 0 4px;display:flex;align-items:center;gap:10px}
+h2 .num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--b);color:#fff;font-size:13px;flex:none}
+.sub{color:var(--g);font-size:13px;margin:0 0 12px 36px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.k{background:#fff;border:1px solid var(--fi);border-radius:14px;padding:14px 14px 12px;text-align:left;cursor:pointer;position:relative;overflow:hidden;transition:transform .12s,box-shadow .12s,border-color .12s}
+.k:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,67,141,.10)}
+.k:before{content:'';position:absolute;left:0;top:0;right:0;height:4px;background:var(--b)}
+.k.rouge:before{background:var(--no)}.k.ambre:before{background:#E59A00}.k.violet:before{background:var(--v)}
+.k .n{font-family:Montserrat,sans-serif;font-weight:800;font-size:34px;color:var(--b);line-height:1.05}
+.k.rouge .n{color:var(--no)}.k.ambre .n{color:var(--am)}.k.violet .n{color:var(--v)}
+.k .l{font-size:12.5px;color:#2B2A35;font-weight:600;margin-top:4px}
+.k .s{font-size:11.5px;color:var(--g);margin-top:3px}
+.k.on{border-color:var(--b);box-shadow:0 0 0 2px var(--b) inset}
+.filtres{background:#fff;border:1px solid var(--fi);border-radius:14px;padding:10px 14px;margin:14px 0 0;position:sticky;top:31px;z-index:20;box-shadow:0 4px 14px rgba(0,47,102,.06)}
+.frow{display:flex;align-items:center;gap:7px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:3px 0}
+.frow::-webkit-scrollbar{display:none}
+.flab{font-size:10.5px;font-weight:700;color:var(--v);text-transform:uppercase;letter-spacing:.07em;min-width:92px;flex:none}
+.chip{flex:none;border:1px solid var(--fi);background:#fff;color:var(--bf);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--b);border-color:var(--b);color:#fff}
+.actif{display:none;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--v);margin-top:6px;padding-top:7px;border-top:1px dashed var(--fi)}
+.actif.vu{display:flex}
+.actif .x{border:0;background:var(--c);color:var(--b);border-radius:999px;padding:4px 10px;font-weight:700;font-size:12px;cursor:pointer}
+.card{background:#fff;border:1px solid var(--fi);border-radius:14px;padding:16px}
+/* étapes */
+.phases{display:grid;grid-template-columns:5fr 2fr 2fr;gap:12px}
+.ph h3{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--g);font-weight:700}
+.ph .rail{display:grid;gap:8px}
+.ph.p1 .rail{grid-template-columns:repeat(5,1fr)}
+.ph.p2 .rail,.ph.p3 .rail{grid-template-columns:repeat(2,1fr)}
+.et{background:#fff;border:1px solid var(--fi);border-radius:12px;padding:10px 8px 9px;text-align:center;cursor:pointer;position:relative;transition:border-color .12s,transform .12s}
+.et:hover{transform:translateY(-2px)}
+.et .ic{width:34px;height:34px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:var(--c);color:var(--b)}
+.et .ic svg{width:18px;height:18px}
+.et .n{font-family:Montserrat,sans-serif;font-weight:800;font-size:24px;color:var(--b);line-height:1}
+.et .l{font-size:11.5px;font-weight:600;color:#2B2A35;margin-top:4px;line-height:1.2;min-height:28px;display:flex;align-items:center;justify-content:center}
+.et .bar{height:4px;border-radius:2px;background:var(--c);margin-top:7px;overflow:hidden}
+.et .bar i{display:block;height:100%;background:var(--b)}
+.ph.p2 .et .ic{background:var(--okc);color:var(--ok)}.ph.p2 .et .n{color:var(--ok)}.ph.p2 .et .bar i{background:var(--ok)}
+.ph.p3 .et .ic{background:#E9E8F2;color:var(--v)}.ph.p3 .et .n{color:var(--v)}.ph.p3 .et .bar i{background:var(--v)}
+.et.on{border-color:var(--b);box-shadow:0 0 0 2px var(--b) inset}
+.et.zero{opacity:.45}
+/* pièces */
+.pieces{display:grid;grid-template-columns:repeat(3,1fr) 1.4fr;gap:12px}
+.pc{cursor:pointer;display:flex;gap:12px;align-items:center;text-align:left}
+.pc .ic{width:42px;height:42px;border-radius:12px;background:var(--noc);color:var(--no);display:grid;place-items:center;flex:none}
+.pc .ic svg{width:22px;height:22px}
+.pc .n{font-family:Montserrat,sans-serif;font-weight:800;font-size:28px;color:var(--no);line-height:1}
+.pc .l{font-weight:700;font-size:13px}
+.pc .s{font-size:11.5px;color:var(--g)}
+.pc.on{border-color:var(--b);box-shadow:0 0 0 2px var(--b) inset}
+.risque{background:var(--amc);border-color:#F3D9A4}
+.risque h3{margin:0 0 6px;font-size:13px;color:var(--am);display:flex;gap:6px;align-items:center}
+.risque p{margin:0;font-size:13px}
+/* messages */
+.msgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.m{background:#fff;border:1px solid var(--fi);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.m.retard{border-left:4px solid var(--no)}
+.m.matin{border-left:4px solid var(--b)}
+.mh{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.mh b{font-size:14px;color:var(--bf)}
+.mh .mo{font-size:12px;color:var(--g)}
+.bulle{background:var(--wa);border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:13.2px;line-height:1.5;color:#1B2B22;position:relative}
+.mf{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.mf .qui{font-size:12px;color:var(--g)}
+.btns{display:flex;gap:6px}
+.bt{border:1px solid var(--b);background:#fff;color:var(--b);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer}
+.bt.p{background:var(--b);color:#fff}
+.m.ok{opacity:.75}
+.m.ok .bt.p{background:var(--ok);border-color:var(--ok)}
+.vide{color:var(--g);font-size:13px;padding:14px;background:#fff;border:1px dashed var(--fi);border-radius:14px;text-align:center}
+/* tags */
+.tag{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.t-b{background:#D6E6F7;color:var(--b)}.t-r{background:var(--noc);color:var(--no)}.t-g{background:#EEF1F5;color:var(--g)}.t-v{background:#E9E8F2;color:var(--v)}.t-ok{background:var(--okc);color:var(--ok)}.t-a{background:var(--amc);color:var(--am)}
+.dot{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;margin-right:8px;white-space:nowrap}
+.dot:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.dot.no{color:var(--no)}.dot.no:before{background:var(--no)}
+.dot.ok{color:var(--ok)}
+/* liste */
+.outils{display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.outils input{flex:1;min-width:200px;border:1px solid var(--fi);border-radius:999px;padding:9px 14px;font-size:14px;font-family:inherit;background:#fff}
+.outils input:focus{outline:2px solid var(--b);border-color:transparent}
+.cpt{font-size:12.5px;color:var(--g)}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;background:#fff;border:1px solid var(--fi);border-radius:14px;overflow:hidden}
+th{background:var(--b);color:#fff;font-weight:700;text-align:left;padding:9px 10px;font-size:12px;white-space:nowrap;position:sticky;top:0}
+th:nth-child(n+5){background:var(--v)}
+td{padding:9px 10px;border-top:1px solid #EEF1F5;vertical-align:top}
+tr:nth-child(even) td{background:#FAFBFD}
+tr.clic{cursor:pointer}
+tr.clic:hover td{background:#EEF4FB}
+td .nm{font-weight:700;color:var(--bf)}
+td .mm{font-size:12px;color:var(--g)}
+.lc{display:none}
+.lc .r{background:#fff;border:1px solid var(--fi);border-radius:14px;padding:12px 13px;margin-bottom:10px}
+.lc .t1{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.lc .t2{margin:7px 0 0;display:flex;flex-wrap:wrap;gap:4px 0}
+.lc .t3{margin-top:8px;padding-top:8px;border-top:1px dashed var(--fi);display:flex;justify-content:space-between;gap:8px;font-size:12.5px;align-items:center}
+/* détail */
+.ov{position:fixed;inset:0;background:rgba(0,20,50,.45);display:none;z-index:50;align-items:flex-end;justify-content:center}
+.ov.vu{display:flex}
+.sh{background:#fff;width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px 18px 24px}
+@media(min-width:700px){.ov{align-items:center}.sh{border-radius:18px}}
+.sh h3{margin:0;font-family:Montserrat,sans-serif;color:var(--b);font-size:18px}
+.frise{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin:14px 0 6px}
+.frise i{height:7px;border-radius:4px;background:#E3E8EF}
+.frise i.f{background:var(--b)}.frise i.c{background:#E59A00}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:6px 10px;font-size:13px;margin-top:12px}
+.kv span{color:var(--g)}
+.fermer{float:right;border:0;background:var(--c);color:var(--b);border-radius:999px;width:32px;height:32px;font-size:18px;cursor:pointer}
+footer{max-width:1180px;margin:0 auto;padding:14px 16px 34px;color:var(--g);font-size:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--fi)}
+footer b{color:var(--v)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--v);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;z-index:60;max-width:92vw;text-align:center}
+.toast.vu{opacity:1}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(3,1fr)}.pieces{grid-template-columns:repeat(3,1fr)}.risque{grid-column:1/-1}.phases{grid-template-columns:1fr 1fr}.ph.p1{grid-column:1/-1}}
+@media(max-width:700px){
+ body{font-size:14px}
+ .hin{padding:12px 14px 14px;gap:12px}.hin img{height:34px}.hin .sep{display:none}.hin h1{font-size:20px}.hin>div:nth-child(3){flex-basis:100%;order:3}
+ .jour{margin-left:auto;text-align:right}.jour b{font-size:13px}
+ main{padding:12px 12px 24px}
+ .kpis{grid-template-columns:1fr 1fr;gap:9px}.kpis .k:first-child{grid-column:1/-1}
+ .k{padding:12px}.k .n{font-size:30px}
+ .filtres{padding:8px 10px;top:30px}.flab{min-width:auto;margin-right:2px}
+ h2{font-size:16.5px;margin-top:24px}.sub{margin-left:0}
+ .phases{grid-template-columns:1fr;gap:12px}
+ .ph.p1 .rail{grid-template-columns:repeat(3,1fr)}
+ .ph.p2 .rail,.ph.p3 .rail{grid-template-columns:repeat(2,1fr)}
+ .pieces{grid-template-columns:1fr 1fr 1fr;gap:8px}
+ .pc{flex-direction:column;align-items:flex-start;gap:6px;padding:12px}.pc .ic{width:34px;height:34px}.pc .n{font-size:24px}
+ .msgs{grid-template-columns:1fr}
+ table{display:none}.lc{display:block}
+}
+</style>
+</head>
+<body>
+<div class="demo"><i></i>Données fictives de démonstration</div>
+<header><div class="hin">
+ <img src="logo-cfao.svg" alt="CFAO Mobility">
+ <div class="sep"></div>
+ <div><h1>Livrer et fidéliser</h1><p>Suivi des commandes BYD et Toyota, de la commande à la première révision</p></div>
+ <div class="jour"><b id="jour"></b><span>situation du matin</span></div>
+</div></header>
+
+<main>
+<div class="kpis" id="kpis"></div>
+
+<div class="filtres">
+ <div class="frow" id="fMarque"><span class="flab">Marque</span></div>
+ <div class="frow" id="fLieu"><span class="flab">Point de vente</span></div>
+ <div class="frow" id="fCons"><span class="flab">Conseiller</span></div>
+ <div class="actif" id="actif"></div>
+</div>
+
+<h2 id="s-msg"><span class="num">1</span>Messages du jour à valider</h2>
+<p class="sub">Chaque message est déjà rédigé pour le client. Le conseiller relit, valide et l'envoie lui-même : rien ne part tout seul.</p>
+<div class="msgs" id="msgs"></div>
+
+<h2 id="s-et"><span class="num">2</span>Commandes par étape</h2>
+<p class="sub">Touchez une étape pour voir ses commandes.</p>
+<div class="phases" id="phases"></div>
+
+<h2 id="s-pc"><span class="num">3</span>Pièces manquantes</h2>
+<p class="sub">Ce qu'il faut encore obtenir du client avant la remise des clés.</p>
+<div class="pieces" id="pieces"></div>
+
+<h2 id="s-li"><span class="num">4</span>Toutes les commandes</h2>
+<div class="outils"><input id="q" type="search" placeholder="Chercher un client, un modèle, un conseiller" autocomplete="off"><span class="cpt" id="cpt"></span></div>
+<table id="tab"><thead><tr><th>Client</th><th>Véhicule</th><th>Point de vente</th><th>Pièces</th><th>Étape</th><th>Prochain message</th><th>Quand</th></tr></thead><tbody></tbody></table>
+<div class="lc" id="lc"></div>
+</main>
+
+<footer>
+ <div><b>Données fictives de démonstration.</b> Mêmes calculs et mêmes chiffres que le classeur de suivi des commandes.</div>
+ <div>Proposé par Yelema, maquette non publiée</div>
+</footer>
+
+<div class="ov" id="ov"><div class="sh" id="sh"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const D={"kpi": {"matin": 5, "retard": 5, "retard7": 2, "risque": 1}, "today": "2026-11-05", "rows": [{"n": 1, "client": "Yao K. Hervé", "app": "M. Yao", "marque": "Toyota", "modele": "Corolla Cross", "prix": 26500000, "lieu": "Abidjan, bd de Marseille", "cons": "Serge", "cmd": "2026-11-05", "acompte": null, "port": null, "prep": null, "rdv": null, "livr": null, "cg": "Manque", "ass": "Manque", "solde": "Manque", "dernier": "", "etape": "Commande confirmée", "pieces": "carte grise, assurance, solde", "prochain": "Commande confirmée", "envoi": "2026-11-05", "statut": "À envoyer ce matin", "alerte": "", "msg": "Bonjour M. Yao, merci pour votre confiance ! Votre commande de Toyota Corolla Cross est bien enregistrée chez CFAO Mobility. Je suis Serge, votre interlocuteur jusqu'à la remise des clés : écrivez-moi ici pour toute question."}, {"n": 2, "client": "Bamba Mariam", "app": "Mme Bamba", "marque": "BYD", "modele": "Atto 3", "prix": 27900000, "lieu": "Abidjan, aéroport", "cons": "Nadège", "cmd": "2026-11-02", "acompte": "2026-11-03", "port": null, "prep": null, "rdv": null, "livr": null, "cg": "Manque", "ass": "Manque", "solde": "Manque", "dernier": "Commande confirmée", "etape": "Acompte", "pieces": "carte grise, assurance, solde", "prochain": "Pièces à fournir", "envoi": "2026-11-05", "statut": "À envoyer ce matin", "alerte": "", "msg": "Bonjour Mme Bamba, pour que votre BYD Atto 3 soit prêt à rouler le jour J, il nous manque encore : carte grise, assurance, solde. Vous pouvez nous envoyer les documents en photo ici, ou passer nous voir chez CFAO Mobility (Abidjan, aéroport). Merci ! Nadège"}, {"n": 3, "client": "Diabaté Lassina", "app": "M. Diabaté", "marque": "Toyota", "modele": "Hilux", "prix": 29800000, "lieu": "Bouaké", "cons": "Prisca", "cmd": "2026-10-20", "acompte": "2026-10-22", "port": "2026-10-30", "prep": null, "rdv": null, "livr": null, "cg": "Manque", "ass": "OK", "solde": "Manque", "dernier": "Pièces à fournir", "etape": "Véhicule au port", "pieces": "carte grise, solde", "prochain": "Arrivée du véhicule", "envoi": "2026-10-30", "statut": "En retard de 6 j", "alerte": "", "msg": "Bonne nouvelle M. Diabaté : votre Toyota Hilux est arrivé au port d'Abidjan ! Il passe maintenant en préparation dans nos ateliers. Je reviens vers vous pour fixer ensemble le rendez-vous de livraison. Prisca, CFAO Mobility"}, {"n": 4, "client": "Koné Adama", "app": "Dr Koné", "marque": "BYD", "modele": "Seal", "prix": 38900000, "lieu": "Abidjan, bd de Marseille", "cons": "Arnaud", "cmd": "2026-10-05", "acompte": "2026-10-07", "port": "2026-10-25", "prep": "2026-10-28", "rdv": "2026-11-06", "livr": null, "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Arrivée du véhicule", "etape": "Rendez-vous de livraison", "pieces": "", "prochain": "Rendez-vous de livraison", "envoi": "2026-11-05", "statut": "À envoyer ce matin", "alerte": "", "msg": "Bonjour Dr Koné, c'est demain ! Votre BYD Seal vous attend le vendredi 6 novembre chez CFAO Mobility (Abidjan, bd de Marseille). Prévoyez environ une heure : nous ferons ensemble le tour du véhicule et de ses fonctions. À demain ! Arnaud"}, {"n": 5, "client": "Touré Awa", "app": "Mme Touré", "marque": "Toyota", "modele": "Yaris", "prix": 14900000, "lieu": "Yamoussoukro", "cons": "Fanta", "cmd": "2026-10-01", "acompte": "2026-10-03", "port": "2026-10-20", "prep": "2026-10-24", "rdv": "2026-11-10", "livr": null, "cg": "OK", "ass": "Manque", "solde": "OK", "dernier": "Arrivée du véhicule", "etape": "Rendez-vous de livraison", "pieces": "assurance", "prochain": "Rendez-vous de livraison", "envoi": "2026-11-09", "statut": "Dans 4 j", "alerte": "Pièce manquante avant livraison", "msg": "Bonjour Mme Touré, c'est demain ! Votre Toyota Yaris vous attend le mardi 10 novembre chez CFAO Mobility (Yamoussoukro). Prévoyez environ une heure : nous ferons ensemble le tour du véhicule et de ses fonctions. À demain ! Fanta"}, {"n": 6, "client": "N'Guessan Paul", "app": "M. N'Guessan", "marque": "BYD", "modele": "Dolphin", "prix": 21900000, "lieu": "Abidjan, aéroport", "cons": "Nadège", "cmd": "2026-09-10", "acompte": "2026-09-12", "port": "2026-10-01", "prep": "2026-10-05", "rdv": "2026-10-29", "livr": "2026-10-29", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Rendez-vous de livraison", "etape": "J+7", "pieces": "", "prochain": "Merci et prise en main (J+7)", "envoi": "2026-11-05", "statut": "À envoyer ce matin", "alerte": "", "msg": "Bonjour M. N'Guessan, déjà une semaine avec votre BYD Dolphin ! Tout se passe bien ? Si une fonction vous pose question (écran, application, réglages), répondez ici : on vous explique en deux minutes. Nadège, CFAO Mobility"}, {"n": 7, "client": "Aka Christelle", "app": "Mme Aka", "marque": "Toyota", "modele": "RAV4", "prix": 34500000, "lieu": "Abidjan, bd de Marseille", "cons": "Serge", "cmd": "2026-09-01", "acompte": "2026-09-03", "port": "2026-09-25", "prep": "2026-10-01", "rdv": "2026-10-20", "livr": "2026-10-20", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Merci et prise en main (J+7)", "etape": "Avis", "pieces": "", "prochain": "Demande d'avis", "envoi": "2026-11-03", "statut": "En retard de 2 j", "alerte": "", "msg": "Mme Aka, votre avis compte beaucoup pour nous. De 1 à 5, quelle note donneriez-vous à votre achat et à votre livraison chez CFAO Mobility ? Une réponse ici suffit, et un mot de plus nous aide à progresser. Merci ! Serge"}, {"n": 8, "client": "Ouattara Ibrahima", "app": "M. Ouattara", "marque": "Toyota", "modele": "Land Cruiser Prado", "prix": 64000000, "lieu": "Abidjan, bd de Marseille", "cons": "Rodrigue", "cmd": "2026-08-28", "acompte": "2026-09-01", "port": "2026-09-30", "prep": "2026-10-06", "rdv": "2026-10-22", "livr": "2026-10-22", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Merci et prise en main (J+7)", "etape": "Avis", "pieces": "", "prochain": "Demande d'avis", "envoi": "2026-11-05", "statut": "À envoyer ce matin", "alerte": "", "msg": "M. Ouattara, votre avis compte beaucoup pour nous. De 1 à 5, quelle note donneriez-vous à votre achat et à votre livraison chez CFAO Mobility ? Une réponse ici suffit, et un mot de plus nous aide à progresser. Merci ! Rodrigue"}, {"n": 9, "client": "Kacou Jean-Marc", "app": "M. Kacou", "marque": "BYD", "modele": "Atto 3", "prix": 27900000, "lieu": "Abidjan, aéroport", "cons": "Arnaud", "cmd": "2026-03-10", "acompte": "2026-03-12", "port": "2026-04-28", "prep": "2026-05-05", "rdv": "2026-05-20", "livr": "2026-05-20", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Demande d'avis", "etape": "Avis", "pieces": "", "prochain": "Rappel de révision", "envoi": "2026-11-06", "statut": "Dans 1 j", "alerte": "", "msg": "Bonjour M. Kacou, votre BYD Atto 3 approche de sa première révision. Voulez-vous que je vous réserve un créneau à l'atelier CFAO Mobility (Abidjan, aéroport) ? Répondez simplement avec le jour qui vous arrange. Arnaud"}, {"n": 10, "client": "Coulibaly Fatou", "app": "Mme Coulibaly", "marque": "Toyota", "modele": "Hilux", "prix": 29800000, "lieu": "Bouaké", "cons": "Prisca", "cmd": "2026-03-02", "acompte": "2026-03-04", "port": "2026-04-20", "prep": "2026-04-28", "rdv": "2026-05-10", "livr": "2026-05-10", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Demande d'avis", "etape": "Révision", "pieces": "", "prochain": "Rappel de révision", "envoi": "2026-10-27", "statut": "En retard de 9 j", "alerte": "Plus de 7 jours de retard", "msg": "Bonjour Mme Coulibaly, votre Toyota Hilux approche de sa première révision. Voulez-vous que je vous réserve un créneau à l'atelier CFAO Mobility (Bouaké) ? Répondez simplement avec le jour qui vous arrange. Prisca"}, {"n": 11, "client": "Assi Roland", "app": "M. Assi", "marque": "Toyota", "modele": "Fortuner", "prix": 39500000, "lieu": "San Pedro", "cons": "Rodrigue", "cmd": "2026-10-28", "acompte": "2026-10-30", "port": null, "prep": null, "rdv": null, "livr": null, "cg": "Manque", "ass": "Manque", "solde": "Manque", "dernier": "Pièces à fournir", "etape": "Acompte", "pieces": "carte grise, assurance, solde", "prochain": "Arrivée du véhicule", "envoi": null, "statut": "En attente de date", "alerte": "", "msg": "Prêt dès que la date est saisie"}, {"n": 12, "client": "Yapi Estelle", "app": "Mme Yapi", "marque": "BYD", "modele": "Dolphin Mini", "prix": 15900000, "lieu": "Abidjan, aéroport", "cons": "Nadège", "cmd": "2026-10-15", "acompte": "2026-10-16", "port": "2026-11-12", "prep": null, "rdv": null, "livr": null, "cg": "Manque", "ass": "OK", "solde": "OK", "dernier": "Pièces à fournir", "etape": "Acompte", "pieces": "carte grise", "prochain": "Arrivée du véhicule", "envoi": "2026-11-12", "statut": "Dans 7 j", "alerte": "", "msg": "Bonne nouvelle Mme Yapi : votre BYD Dolphin Mini est arrivé au port d'Abidjan ! Il passe maintenant en préparation dans nos ateliers. Je reviens vers vous pour fixer ensemble le rendez-vous de livraison. Nadège, CFAO Mobility"}, {"n": 13, "client": "Soro Daouda", "app": "M. Soro", "marque": "BYD", "modele": "Atto 3", "prix": 27900000, "lieu": "Abidjan, bd de Marseille", "cons": "Arnaud", "cmd": "2026-09-25", "acompte": "2026-09-27", "port": "2026-10-22", "prep": "2026-11-03", "rdv": null, "livr": null, "cg": "OK", "ass": "OK", "solde": "Manque", "dernier": "Arrivée du véhicule", "etape": "Préparation", "pieces": "solde", "prochain": "Rendez-vous de livraison", "envoi": null, "statut": "En attente de date", "alerte": "", "msg": "Prêt dès que la date est saisie"}, {"n": 14, "client": "Kouamé Aya", "app": "Mme Kouamé", "marque": "Toyota", "modele": "Corolla", "prix": 21500000, "lieu": "Yamoussoukro", "cons": "Fanta", "cmd": "2026-08-20", "acompte": "2026-08-22", "port": "2026-09-20", "prep": "2026-09-28", "rdv": "2026-10-15", "livr": "2026-10-15", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Rendez-vous de livraison", "etape": "Avis", "pieces": "", "prochain": "Merci et prise en main (J+7)", "envoi": "2026-10-22", "statut": "En retard de 14 j", "alerte": "Plus de 7 jours de retard", "msg": "Bonjour Mme Kouamé, déjà une semaine avec votre Toyota Corolla ! Tout se passe bien ? Si une fonction vous pose question (écran, application, réglages), répondez ici : on vous explique en deux minutes. Fanta, CFAO Mobility"}, {"n": 15, "client": "Doumbia Karim", "app": "M. Doumbia", "marque": "BYD", "modele": "Seal", "prix": 38900000, "lieu": "Abidjan, bd de Marseille", "cons": "Arnaud", "cmd": "2026-09-01", "acompte": "2026-09-03", "port": "2026-10-10", "prep": "2026-10-20", "rdv": "2026-11-03", "livr": "2026-11-03", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Rendez-vous de livraison", "etape": "Livré", "pieces": "", "prochain": "Merci et prise en main (J+7)", "envoi": "2026-11-10", "statut": "Dans 5 j", "alerte": "", "msg": "Bonjour M. Doumbia, déjà une semaine avec votre BYD Seal ! Tout se passe bien ? Si une fonction vous pose question (écran, application, réglages), répondez ici : on vous explique en deux minutes. Arnaud, CFAO Mobility"}, {"n": 16, "client": "Ehui Sandrine", "app": "Mme Ehui", "marque": "Toyota", "modele": "Yaris", "prix": 14900000, "lieu": "Bouaké", "cons": "Prisca", "cmd": "2026-11-04", "acompte": null, "port": null, "prep": null, "rdv": null, "livr": null, "cg": "Manque", "ass": "Manque", "solde": "Manque", "dernier": "Commande confirmée", "etape": "Commande confirmée", "pieces": "carte grise, assurance, solde", "prochain": "Pièces à fournir", "envoi": "2026-11-06", "statut": "Dans 1 j", "alerte": "", "msg": "Bonjour Mme Ehui, pour que votre Toyota Yaris soit prêt à rouler le jour J, il nous manque encore : carte grise, assurance, solde. Vous pouvez nous envoyer les documents en photo ici, ou passer nous voir chez CFAO Mobility (Bouaké). Merci ! Prisca"}, {"n": 17, "client": "Kra Emmanuel", "app": "M. Kra", "marque": "Toyota", "modele": "Hilux", "prix": 29800000, "lieu": "San Pedro", "cons": "Rodrigue", "cmd": "2026-02-05", "acompte": "2026-02-07", "port": "2026-03-20", "prep": "2026-03-28", "rdv": "2026-04-12", "livr": "2026-04-12", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Rappel de révision", "etape": "Révision", "pieces": "", "prochain": "Fin de garantie", "envoi": "2029-03-13", "statut": "Planifié", "alerte": "", "msg": "Bonjour M. Kra, la garantie constructeur de votre Toyota Hilux se termine le jeudi 12 avril 2029. Un contrôle complet avant cette date permet de vérifier que tout est en ordre tant qu'elle court. Je vous réserve un créneau ? Rodrigue, CFAO Mobility"}, {"n": 18, "client": "Diallo Kadiatou", "app": "Mme Diallo", "marque": "BYD", "modele": "Dolphin", "prix": 21900000, "lieu": "Abidjan, aéroport", "cons": "Nadège", "cmd": "2026-10-08", "acompte": "2026-10-09", "port": "2026-10-28", "prep": null, "rdv": null, "livr": null, "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Arrivée du véhicule", "etape": "Véhicule au port", "pieces": "", "prochain": "Rendez-vous de livraison", "envoi": null, "statut": "En attente de date", "alerte": "", "msg": "Prêt dès que la date est saisie"}, {"n": 19, "client": "Tanoh Didier", "app": "M. Tanoh", "marque": "Toyota", "modele": "RAV4", "prix": 34500000, "lieu": "Abidjan, bd de Marseille", "cons": "Serge", "cmd": "2026-10-12", "acompte": "2026-10-14", "port": "2026-11-03", "prep": null, "rdv": null, "livr": null, "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Commande confirmée", "etape": "Véhicule au port", "pieces": "", "prochain": "Arrivée du véhicule", "envoi": "2026-11-03", "statut": "En retard de 2 j", "alerte": "", "msg": "Bonne nouvelle M. Tanoh : votre Toyota RAV4 est arrivé au port d'Abidjan ! Il passe maintenant en préparation dans nos ateliers. Je reviens vers vous pour fixer ensemble le rendez-vous de livraison. Serge, CFAO Mobility"}, {"n": 20, "client": "Brou Laetitia", "app": "Mme Brou", "marque": "BYD", "modele": "Atto 3", "prix": 27900000, "lieu": "Abidjan, aéroport", "cons": "Arnaud", "cmd": "2026-09-01", "acompte": "2026-09-03", "port": "2026-10-05", "prep": "2026-10-14", "rdv": "2026-10-30", "livr": "2026-10-30", "cg": "OK", "ass": "OK", "solde": "OK", "dernier": "Rendez-vous de livraison", "etape": "Livré", "pieces": "", "prochain": "Merci et prise en main (J+7)", "envoi": "2026-11-06", "statut": "Dans 1 j", "alerte": "", "msg": "Bonjour Mme Brou, déjà une semaine avec votre BYD Atto 3 ! Tout se passe bien ? Si une fonction vous pose question (écran, application, réglages), répondez ici : on vous explique en deux minutes. Arnaud, CFAO Mobility"}]};
+const ETAPES=['Commande confirmée','Acompte','Véhicule au port','Préparation','Rendez-vous de livraison','Livré','J+7','Avis','Révision'];
+const LAB={'Rendez-vous de livraison':'Rendez-vous de livraison','J+7':'Merci J+7','Avis':'Avis demandé','Révision':'Révision rappelée'};
+const IC={
+'Commande confirmée':'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>',
+'Acompte':'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20M6 15h4"/>',
+'Véhicule au port':'<path d="M2 20c2 1 4 1 6 0s4-1 6 0 4 1 6 0"/><path d="M4 16l1-5h14l1 5"/><path d="M9 11V6h6v5"/>',
+'Préparation':'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+'Rendez-vous de livraison':'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M9 15l2 2 4-4"/>',
+'Livré':'<path d="M5 17h-2v-5l2-5h11l3 5h2v5h-2"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/>',
+'J+7':'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+'Avis':'<path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 18l-6.2 3.2L7 14.2 2 9.4l7-.9z"/>',
+'Révision':'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+'carte grise':'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 17c.6-1.8 1.8-2.6 3.2-2.6s2.6.8 3.2 2.6M14 9h4M14 13h4"/>',
+'assurance':'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+'solde':'<circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.6-.6-3-1.6M12 6v2M12 16v2"/>',
+'alerte':'<path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>'};
+const svg=k=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[k]+'</svg>';
+const JOURS=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'],MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],MC=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+const dt=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(Date.UTC(y,m-1,d))};
+const TODAY=dt(D.today);
+const court=s=>{if(!s)return'';const x=dt(s);return x.getUTCDate()+' '+MC[x.getUTCMonth()]+(x.getUTCFullYear()!==TODAY.getUTCFullYear()?' '+x.getUTCFullYear():'')};
+const long=x=>JOURS[x.getUTCDay()]+' '+x.getUTCDate()+' '+MOIS[x.getUTCMonth()]+' '+x.getUTCFullYear();
+const ecart=s=>Math.round((dt(s)-TODAY)/864e5);
+const fcfa=n=>n.toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ')+' FCFA';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+D.rows.forEach(r=>{r.retard=r.statut.startsWith('En retard');r.matin=r.statut==='À envoyer ce matin';r.retard7=!!(r.envoi&&ecart(r.envoi)<-7);r.risque=r.alerte.startsWith('Pièce');r.manque=[['carte grise',r.cg],['assurance',r.ass],['solde',r.solde]].filter(p=>p[1]==='Manque').map(p=>p[0])});
+
+const P=new URLSearchParams(location.search);
+const st={marque:P.get('marque')||'',lieu:P.get('lieu')||'',cons:P.get('cons')||'',focus:P.get('focus')||'',etape:P.get('etape')||'',piece:P.get('piece')||'',q:''};
+const valides=new Set();
+const base=()=>D.rows.filter(r=>(!st.marque||r.marque===st.marque)&&(!st.lieu||r.lieu===st.lieu)&&(!st.cons||r.cons===st.cons));
+const FOCUS={matin:['Messages à envoyer ce matin',r=>r.matin],retard:['Messages en retard',r=>r.retard],retard7:['En retard de plus de 7 jours',r=>r.retard7],risque:['Livraisons à risque',r=>r.risque],tous:['Commandes suivies',r=>true]};
+function liste(){let L=base();
+ if(st.focus&&FOCUS[st.focus])L=L.filter(FOCUS[st.focus][1]);
+ if(st.etape)L=L.filter(r=>r.etape===st.etape);
+ if(st.piece)L=L.filter(r=>r.manque.includes(st.piece));
+ if(st.q){const q=st.q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');L=L.filter(r=>(r.client+' '+r.app+' '+r.marque+' '+r.modele+' '+r.cons+' '+r.lieu).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q))}
+ return L}
+function chips(id,cle,vals,lab){const el=document.getElementById(id);el.innerHTML='<span class="flab">'+lab+'</span>'+['',...vals].map(v=>'<button class="chip'+(st[cle]===v?' on':'')+'" data-v="'+esc(v)+'">'+(v?esc(v):'Tous')+'</button>').join('');
+ el.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{st[cle]=b.dataset.v;rendre()})}
+function tagStatut(r){if(r.matin)return'<span class="tag t-b">À envoyer ce matin</span>';if(r.retard)return'<span class="tag t-r">'+esc(r.statut)+'</span>';if(r.statut==='Terminé')return'<span class="tag t-ok">Terminé</span>';if(r.statut==='En attente de date')return'<span class="tag t-g">En attente de date</span>';return'<span class="tag t-v">'+esc(r.statut)+'</span>'}
+function pastilles(r){if(r.livr)return'<span class="dot ok">Dossier complet</span>';return[['Carte grise',r.cg],['Assurance',r.ass],['Solde',r.solde]].map(p=>'<span class="dot '+(p[1]==='Manque'?'no':'ok')+'">'+p[0]+'</span>').join('')}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('vu');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('vu'),2600)}
+
+function rendre(){
+ const B=base();
+ document.getElementById('jour').textContent=long(TODAY).replace(/^./,c=>c.toUpperCase());
+ const n=f=>B.filter(f).length;
+ const K=[['matin','',n(r=>r.matin),'Messages à envoyer ce matin','prêts à valider'],['retard','rouge',n(r=>r.retard),'Messages en retard','à rattraper aujourd\'hui'],['retard7','rouge',n(r=>r.retard7),'En retard de plus de 7 jours','client qui attend'],['risque','ambre',n(r=>r.risque),'Livraison à risque','pièce manquante avant remise'],['tous','violet',B.length,'Commandes suivies','BYD et Toyota']];
+ document.getElementById('kpis').innerHTML=K.map(k=>'<button class="k '+k[1]+(st.focus===k[0]?' on':'')+'" data-f="'+k[0]+'"><div class="n">'+k[2]+'</div><div class="l">'+k[3]+'</div><div class="s">'+k[4]+'</div></button>').join('');
+ document.querySelectorAll('.k').forEach(b=>b.onclick=()=>{st.focus=st.focus===b.dataset.f?'':b.dataset.f;st.etape='';st.piece='';rendre();document.getElementById('s-li').scrollIntoView()});
+ chips('fMarque','marque',['BYD','Toyota'],'Marque');
+ chips('fLieu','lieu',[...new Set(D.rows.map(r=>r.lieu))],'Point de vente');
+ chips('fCons','cons',[...new Set(D.rows.map(r=>r.cons))].sort(),'Conseiller');
+ // filtre actif
+ const a=[];if(st.marque)a.push(st.marque);if(st.lieu)a.push(st.lieu);if(st.cons)a.push(st.cons);if(st.focus)a.push(FOCUS[st.focus][0]);if(st.etape)a.push('Étape : '+st.etape);if(st.piece)a.push('Pièce : '+st.piece);
+ const ac=document.getElementById('actif');ac.classList.toggle('vu',a.length>0);ac.innerHTML='Filtre : <b>'+a.map(esc).join(' + ')+'</b> <button class="x">Tout afficher</button>';
+ ac.querySelector('.x').onclick=()=>{Object.assign(st,{marque:'',lieu:'',cons:'',focus:'',etape:'',piece:'',q:''});document.getElementById('q').value='';rendre()};
+ // messages
+ const M=B.filter(r=>r.matin||r.retard).sort((x,y)=>(x.envoi<y.envoi?-1:1));
+ document.getElementById('msgs').innerHTML=M.length?M.map(r=>{const ok=valides.has(r.n);return'<div class="m '+(r.retard?'retard':'matin')+(ok?' ok':'')+'"><div class="mh"><div><b>'+esc(r.app)+'</b><div class="mo">'+esc(r.marque+' '+r.modele)+' | '+esc(r.prochain)+'</div></div>'+tagStatut(r)+'</div><div class="bulle">'+esc(r.msg)+'</div><div class="mf"><span class="qui">Conseiller : '+esc(r.cons)+'</span><div class="btns"><button class="bt" data-c="'+r.n+'">Copier</button><button class="bt p" data-v="'+r.n+'">'+(ok?'Validé':'Valider')+'</button></div></div></div>'}).join(''):'<div class="vide">Aucun message à valider pour ce filtre.</div>';
+ document.querySelectorAll('[data-v]').forEach(b=>{if(!b.classList.contains('bt'))return;b.onclick=()=>{const k=+b.dataset.v;valides.has(k)?valides.delete(k):valides.add(k);toast(valides.has(k)?'Message validé. Démonstration : rien n\'est envoyé.':'Validation retirée.');rendre()}});
+ document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{const r=D.rows.find(x=>x.n===+b.dataset.c);(navigator.clipboard?navigator.clipboard.writeText(r.msg):Promise.reject()).then(()=>toast('Message copié.'),()=>toast('Copie impossible sur ce navigateur.'))});
+ // étapes
+ const mx=Math.max(...ETAPES.map(e=>B.filter(r=>r.etape===e).length),1);
+ const ph=[['p1','Avant la livraison',ETAPES.slice(0,5)],['p2','Livraison',ETAPES.slice(5,7)],['p3','Fidélisation',ETAPES.slice(7)]];
+ document.getElementById('phases').innerHTML=ph.map(p=>'<div class="ph '+p[0]+'"><h3>'+p[1]+' ('+B.filter(r=>p[2].includes(r.etape)).length+')</h3><div class="rail">'+p[2].map(e=>{const c=B.filter(r=>r.etape===e).length;return'<button class="et'+(st.etape===e?' on':'')+(c?'':' zero')+'" data-e="'+esc(e)+'"><div class="ic">'+svg(e)+'</div><div class="n">'+c+'</div><div class="l">'+esc(LAB[e]||e)+'</div><div class="bar"><i style="width:'+(c/mx*100)+'%"></i></div></button>'}).join('')+'</div></div>').join('');
+ document.querySelectorAll('.et').forEach(b=>b.onclick=()=>{st.etape=st.etape===b.dataset.e?'':b.dataset.e;st.focus='';st.piece='';rendre();document.getElementById('s-li').scrollIntoView()});
+ // pièces
+ const pc=['carte grise','assurance','solde'].map(p=>{const c=B.filter(r=>r.manque.includes(p)).length;return'<button class="card pc'+(st.piece===p?' on':'')+'" data-p="'+p+'"><div class="ic">'+svg(p)+'</div><div><div class="n">'+c+'</div><div class="l">'+p.replace(/^./,x=>x.toUpperCase())+'</div><div class="s">dossier'+(c>1?'s':'')+' à compléter</div></div></button>'}).join('');
+ const R=B.filter(r=>r.risque);
+ const rq='<div class="card risque"><h3>'+svg('alerte').replace('<svg','<svg width="16" height="16"')+'Livraison à risque</h3>'+(R.length?R.map(r=>'<p><b>'+esc(r.app)+'</b>, '+esc(r.marque+' '+r.modele)+' : remise des clés le '+long(dt(r.rdv)).replace(/ \d{4}$/,'')+' à '+esc(r.lieu)+', il manque encore : <b>'+esc(r.pieces)+'</b>.</p>').join(''):'<p>Aucune livraison prévue avec une pièce manquante.</p>')+'</div>';
+ document.getElementById('pieces').innerHTML=pc+rq;
+ document.querySelectorAll('.pc').forEach(b=>b.onclick=()=>{st.piece=st.piece===b.dataset.p?'':b.dataset.p;st.focus='';st.etape='';rendre();document.getElementById('s-li').scrollIntoView()});
+ // liste
+ const L=liste();
+ document.getElementById('cpt').textContent=L.length+' commande'+(L.length>1?'s':'')+' sur '+D.rows.length;
+ const quand=r=>r.envoi?court(r.envoi):'';
+ document.querySelector('#tab tbody').innerHTML=L.map(r=>'<tr class="clic" data-n="'+r.n+'"><td><div class="nm">'+esc(r.client)+'</div><div class="mm">'+esc(r.cons)+'</div></td><td>'+esc(r.marque)+' '+esc(r.modele)+'<div class="mm">'+fcfa(r.prix)+'</div></td><td>'+esc(r.lieu)+'</td><td>'+pastilles(r)+'</td><td><span class="tag t-v">'+esc(r.etape)+'</span>'+(r.alerte?'<div style="margin-top:4px"><span class="tag t-a">'+esc(r.alerte)+'</span></div>':'')+'</td><td>'+esc(r.prochain)+'</td><td><div class="mm">'+quand(r)+'</div>'+tagStatut(r)+'</td></tr>').join('')||'<tr><td colspan="7" style="text-align:center;color:var(--g)">Aucune commande pour ce filtre.</td></tr>';
+ document.getElementById('lc').innerHTML=L.map(r=>'<div class="r clic" data-n="'+r.n+'"><div class="t1"><div><div style="font-weight:700;color:var(--bf)">'+esc(r.client)+'</div><div style="font-size:12px;color:var(--g)">'+esc(r.marque+' '+r.modele)+' | '+esc(r.lieu)+'</div></div><span class="tag t-v">'+esc(r.etape)+'</span></div><div class="t2">'+pastilles(r)+'</div>'+(r.alerte?'<div style="margin-top:6px"><span class="tag t-a">'+esc(r.alerte)+'</span></div>':'')+'<div class="t3"><span><b>'+esc(r.prochain)+'</b>'+(r.envoi?' | '+quand(r):'')+'</span>'+tagStatut(r)+'</div></div>').join('')||'<div class="vide">Aucune commande pour ce filtre.</div>';
+ document.querySelectorAll('.clic').forEach(e=>e.onclick=()=>detail(+e.dataset.n));
+ const u=new URLSearchParams();['marque','lieu','cons','focus','etape','piece'].forEach(k=>st[k]&&u.set(k,st[k]));history.replaceState(null,'',location.pathname+(u.toString()?'?'+u:''));
+}
+function detail(n){const r=D.rows.find(x=>x.n===n),i=ETAPES.indexOf(r.etape);
+ const j=[['Commande',r.cmd],['Acompte',r.acompte],['Arrivée au port',r.port],['Préparation',r.prep],['Rendez-vous de livraison',r.rdv],['Livraison',r.livr]].filter(x=>x[1]);
+ document.getElementById('sh').innerHTML='<button class="fermer" aria-label="Fermer">×</button><h3>'+esc(r.client)+'</h3><div style="color:var(--g);font-size:13px">'+esc(r.marque+' '+r.modele)+' | '+fcfa(r.prix)+' | '+esc(r.lieu)+' | conseiller '+esc(r.cons)+'</div><div class="frise">'+ETAPES.map((e,k)=>'<i class="'+(k<i?'f':k===i?'c':'')+'" title="'+esc(e)+'"></i>').join('')+'</div><div style="font-size:12.5px"><b style="color:var(--b)">Étape : '+esc(r.etape)+'</b> ('+(i+1)+' sur 9)</div><div class="kv">'+j.map(x=>'<span>'+x[0]+'</span><b>'+court(x[1])+'</b>').join('')+'<span>Pièces</span><div>'+pastilles(r)+'</div><span>Dernier message</span><div>'+esc(r.dernier||'aucun')+'</div><span>Prochain message</span><div><b>'+esc(r.prochain)+'</b> '+(r.envoi?court(r.envoi)+' ':'')+tagStatut(r)+'</div></div>'+(r.msg&&!r.msg.startsWith('Prêt dès')?'<div class="bulle" style="margin-top:14px">'+esc(r.msg)+'</div>':'<div class="vide" style="margin-top:14px">'+esc(r.msg||'Parcours terminé')+'</div>');
+ document.getElementById('ov').classList.add('vu');document.querySelector('.fermer').onclick=fermer}
+function fermer(){document.getElementById('ov').classList.remove('vu')}
+document.getElementById('ov').onclick=e=>{if(e.target.id==='ov')fermer()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fermer()});
+document.getElementById('q').oninput=e=>{st.q=e.target.value.trim();rendre()};
+rendre();
+</script>
+</body>
+</html>
